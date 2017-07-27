@@ -1,4 +1,4 @@
 <header>
-  <app-header></app-header>
+  <app-header [expandMenu]="expandMenu" (toggle)="toggleMenu($event)"></app-header>
 </header>
-<app-side-menu></app-side-menu>
+<app-side-menu [menuCollapsed]="expandMenu"></app-side-menu>

@@ -1,5 +1,8 @@
 @import "../../assets/less/variable";
 .side-menu{
+  position: fixed;
+  top: 51px;
+  bottom: 0;
   width: 150px;
   background-color: @dark;
   li{
@@ -14,7 +17,7 @@
     &.active{
       font-size: 18px;
       font-weight: bold;
-      background: lightseagreen;
+      background: @highlight-color;
       height: 50px;
       line-height: 50px;
       border-top: 1px solid lighten(@gray, 25%);
@@ -25,8 +28,20 @@
     }
     span{
       width: 24px;
+      font-size: 16px;
       text-align: center;
       margin-right: 8px;
+    }
+  }
+}
+
+.side-menu.collapsed{
+  width: 50px;
+  li,li.active{
+    height: 40px;
+    line-height: 40px;
+    small{
+      display: none;
     }
   }
 }

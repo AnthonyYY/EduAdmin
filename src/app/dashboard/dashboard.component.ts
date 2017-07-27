@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  expandMenu: boolean;
   constructor() { }
 
   ngOnInit() {
+    this.expandMenu = false;
+  }
+
+  toggleMenu($event) {
+    this.expandMenu = $event;
   }
 
 }

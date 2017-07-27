@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-side-menu',
@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor() { }
   menu: Array<{label:string,icon:string,routerLink: Array<string>}>;
+  @Input()
+  menuCollapsed: boolean;
+  constructor() { }
 
   ngOnInit() {
+
+    this.menuCollapsed = document.querySelector('body').clientWidth < 767;
+
     this.menu = [{
       label: '课程信息',
       icon: 'fa-book',

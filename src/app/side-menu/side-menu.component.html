@@ -1,6 +1,6 @@
-<ul class="side-menu">
+<ul class="side-menu" [class.collapsed]="menuCollapsed">
   <li *ngFor="let item of menu" [routerLink]="item.routerLink" routerLinkActive="active">
     <span class="fa {{item.icon}}"></span>
-    {{ item.label }}
+    <small>{{ item.label }}</small>
   </li>
 </ul>
