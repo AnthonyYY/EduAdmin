@@ -1,4 +1,4 @@
-<ul class="side-menu" [class.collapsed]="menuCollapsed">
+<ul class="side-menu" [class.collapsed]="!menuCollapsed">
   <li *ngFor="let item of menu" [routerLink]="item.routerLink" routerLinkActive="active">
     <span class="fa {{item.icon}}"></span>
     <small>{{ item.label }}</small>

@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.expandMenu = false;
+    this.expandMenu = document.querySelector('body').clientWidth > 767;
   }
 
   toggleMenu($event) {

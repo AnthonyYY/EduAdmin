@@ -1,3 +1,11 @@
-<p>
-  syllabus works!
-</p>
+<p-dataTable [value]="syllabuses"  [paginator]="syllabuses.length > 10" [rows]="10">
+  <p-header>
+    课程信息概览
+  </p-header>
+  <p-column [field]="'name'" [header]="'课程名称'" [sortable]="true"></p-column>
+  <p-column [field]="'type'" [header]="'类型'" [sortable]="true"></p-column>
+  <p-column [field]="'price'" [header]="'价格'" [sortable]="true"></p-column>
+  <p-column [field]="'studentNum'" [header]="'学生人数'" [sortable]="true"></p-column>
+  <p-column [field]="'selectedNum'" [header]="'选课人数'" [sortable]="true"></p-column>
+  <p-column [field]="'backNum'" [header]="'退选人数'" [sortable]="true"></p-column>
+</p-dataTable>

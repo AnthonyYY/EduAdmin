@@ -1,20 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.less']
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, OnChanges {
 
   menu: Array<{label:string,icon:string,routerLink: Array<string>}>;
   @Input()
   menuCollapsed: boolean;
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(changes) {
+    console.log(changes);
+  }
 
-    this.menuCollapsed = document.querySelector('body').clientWidth < 767;
+  ngOnInit() {
 
     this.menu = [{
       label: '课程信息',

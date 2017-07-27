@@ -9,7 +9,8 @@ import {
   InputTextModule,
   TieredMenuModule,
   MenuModule,
-  PasswordModule
+  PasswordModule,
+  DataTableModule
 } from "primeng/primeng";
 
 import { routes } from './routes';
@@ -49,6 +50,7 @@ import { RoleComponent } from './role/role.component';
     GrowlModule,
     MenuModule,
     TieredMenuModule,
+    DataTableModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
