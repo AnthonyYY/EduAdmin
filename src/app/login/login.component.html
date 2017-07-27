@@ -1,0 +1,25 @@
+<div class="container login-screen">
+  <div class="ui-g ui-fluid center-block login-panel">
+
+    <p class="center-block text-center sys-title">Edu - Admin</p>
+    <form class="ui-g-12 ui-md-12" autocomplete="off">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+        <input type="text" name="usernmae" class="ui-inputtext" pInputText [(ngModel)]="user.name" placeholder="请输入用户名">
+      </div>
+
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-unlock-alt"></i></span>
+        <input type="password" [feedback]="false" name="password" class="ui-inputtext" pPassword [(ngModel)]="user.password" placeholder="请输入密码">
+      </div>
+
+      <div class="ui-inputgroup">
+        <button type="button" class="btn btn-success btn-block" [disabled]="!user.name || !user.password" (click)="loginIn()">登录</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="ui-growl-container">
+  <p-growl [(value)]="msgs" [immutable]="false"></p-growl>
+</div>
