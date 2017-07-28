@@ -44,18 +44,6 @@ export class SideMenuComponent implements OnInit {
         label: '审核流程管理',
         icon: 'fa-inbox',
         items: [{
-          label: '课程信息',
-          icon: 'fa-book',
-          routerLink: ['syllabus1']
-        },{
-          label: '员工信息',
-          icon: 'fa-users',
-          routerLink: ['employees1']
-        },{
-          label: '角色信息',
-          icon: 'fa-user',
-          routerLink: ['role1s']
-        },{
           label: '校区信息',
           icon: 'fa-building',
           routerLink: ['sc2hools']

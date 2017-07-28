@@ -1,0 +1,22 @@
+@import "../../assets/less/variable";
+/* p-panelMenu */
+p-panelMenu {
+  .ui-widget {
+    background: @white;
+    border: none;
+    .ui-widget-content {
+      border: none;
+      border-bottom: 1px solid @pale;
+      a.ui-state-active{
+        background: @pale;
+        color: @white;
+      }
+      a.ui-state-active:hover{
+        background: @pale;
+      }
+    }
+  }
+  .ui-corner-top {
+    border-radius: 0;
+  }
+}
