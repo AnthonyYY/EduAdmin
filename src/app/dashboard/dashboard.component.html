@@ -1,8 +1,11 @@
 <header>
-  <app-header [expandMenu]="expandMenu" (toggle)="toggleMenu($event)"></app-header>
+  <app-header></app-header>
 </header>
-<app-side-menu [menuCollapsed]="expandMenu"></app-side-menu>
 
-<div class="views" [style.left]="expandMenu ? '150px':'50px'">
+<div class="side-menu">
+  <app-side-menu></app-side-menu>
+</div>
+
+<div class="views">
   <router-outlet></router-outlet>
 </div>

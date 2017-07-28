@@ -10,7 +10,7 @@ import {
   TieredMenuModule,
   MenuModule,
   PasswordModule,
-  DataTableModule
+  DataTableModule, PanelMenuModule
 } from "primeng/primeng";
 
 import { routes } from './routes';
@@ -26,6 +26,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { SchoolComponent } from './school/school.component';
 import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -49,8 +50,9 @@ import { RoleComponent } from './role/role.component';
     PasswordModule,
     GrowlModule,
     MenuModule,
-    TieredMenuModule,
+    PanelMenuModule,
     DataTableModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

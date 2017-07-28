@@ -1,6 +1,1 @@
-<ul class="side-menu" [class.collapsed]="!menuCollapsed">
-  <li *ngFor="let item of menu" [routerLink]="item.routerLink" routerLinkActive="active">
-    <span class="fa {{item.icon}}"></span>
-    <small>{{ item.label }}</small>
-  </li>
-</ul>
+<p-panelMenu [model]="menuItems"></p-panelMenu>
