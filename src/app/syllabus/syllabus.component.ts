@@ -9,26 +9,33 @@ import {Syllabus} from "../models/syllabus";
 export class SyllabusComponent implements OnInit {
 
   syllabuses: Array<Syllabus>;
+  chosenSyllabus: Syllabus;
+  newSyllabus: Syllabus;
+  syllabusTypes = [{label: '一对一课程',value:'ONETOONE'},{label: '精品小组',value:'BOUTIQUEGROUP'},{label: '常规班',value:'NORMALGROUP'}];
+  showEditDialog: boolean;
+  showAdderDialog: boolean;
   constructor() {}
 
   ngOnInit() {
     this.syllabuses = [
-      new Syllabus(1,'哦阿斯蒂芬','ONETOONE',1,120,12,23, new Date(),new Date(),false),
-      new Syllabus(2,'精品课a程','NORMALGROUP',1,240,12,12, new Date(),new Date(),false),
-      new Syllabus(3,'精品d课程','NORMALGROUP',1,22,12,12, new Date(),new Date(),false),
-      new Syllabus(4,'精品sd课程','NORMALGROUP',1,240,12,12, new Date(),new Date(),false),
-      new Syllabus(5,'精品课ds程','NORMALGROUP',1,440,12,12, new Date(),new Date(),false),
-      new Syllabus(20,'精品d课程','NORMALGROUP',1,540,12,12, new Date(),new Date(),false),
-      new Syllabus(21,'精品课sd程','NORMALGROUP',1,340,12,12, new Date(),new Date(),false),
-      new Syllabus(22,'精品s课程','NORMALGROUP',1,240,12,12, new Date(),new Date(),false),
-      new Syllabus(22,'精品s课程','NORMALGROUP',1,240,12,12, new Date(),new Date(),false),
-      new Syllabus(22,'精品s课程','NORMALGROUP',1,240,12,12, new Date(),new Date(),false),
-      new Syllabus(23,'精s品课程','NORMALGROUP',1,240,12,12)
-    ]
+      new Syllabus('哦阿斯蒂芬','ONETOONE',1,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',2,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',3,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',4,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',5,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',6,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',7,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',8,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',9,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',10,1,120,12,23, new Date(),new Date(),false),
+      new Syllabus('哦阿斯蒂芬','ONETOONE',11,1,120,12,23, new Date(),new Date(),false)
+    ];
+    this.chosenSyllabus = new Syllabus('哦阿斯蒂芬','ONETOONE',1,1,120,12,23, new Date(),new Date(),false);
+    this.showEditDialog = false;
+    this.showAdderDialog = false;
   }
 
-  showDialogToAdd() {
-
+  onRowSelect(data):void {
+    this.showEditDialog = true;
   }
-
 }

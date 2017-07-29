@@ -10,7 +10,7 @@ import {
   TieredMenuModule,
   MenuModule,
   PasswordModule,
-  DataTableModule, PanelMenuModule
+  DataTableModule, PanelMenuModule, ToolbarModule, BreadcrumbModule, DialogModule, DropdownModule
 } from "primeng/primeng";
 
 import { routes } from './routes';
@@ -51,8 +51,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     GrowlModule,
     MenuModule,
     PanelMenuModule,
+    BreadcrumbModule,
     DataTableModule,
     BrowserAnimationsModule,
+    ToolbarModule,
+    DialogModule,
+    DropdownModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

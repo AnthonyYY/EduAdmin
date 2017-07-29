@@ -1,6 +1,15 @@
-<p-dataTable [value]="syllabuses"  [paginator]="syllabuses.length > 10" [rows]="10">
-  <p-header>
-    课程信息概览
+<p-dataTable [value]="syllabuses"  [paginator]="syllabuses.length > 10" [rows]="10" (onRowSelect)="onRowSelect($event)" [selectionMode]="'single'">
+  <p-header class="clearfix">
+    <p class="pull-left title">课程信息概览</p>
+    <div class="ui-inputgroup pull-right syllabus-adder">
+      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加课程'"></button>
+    </div>
+    <div class="ui-g pull-right" >
+      <div class="ui-inputgroup syllabus-searcher">
+        <input type="text" pInputText placeholder="请输入课程名称">
+        <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
   </p-header>
   <p-column [field]="'name'" [header]="'课程名称'" [sortable]="true"></p-column>
   <p-column [field]="'type'" [header]="'类型'" [sortable]="true"></p-column>
@@ -9,3 +18,32 @@
   <p-column [field]="'selectedNum'" [header]="'选课人数'" [sortable]="true"></p-column>
   <p-column [field]="'backNum'" [header]="'退选人数'" [sortable]="true"></p-column>
 </p-dataTable>
+
+
+<p-dialog [(visible)]="showEditDialog" [modal]="true" [responsive]="true" [width]="420">
+  <p-header>编辑课程信息</p-header>
+
+  <div class="ui-grid ui-grid-responsive ui-fluid">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-3"><label for="type">课程类型</label></div>
+      <div class="ui-grid-col-9"><p-dropdown id="type" [options]="syllabusTypes" [(ngModel)]="chosenSyllabus.type" [style]="{'width':'100%'}"></p-dropdown></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-3"><label for="name">课程名称</label></div>
+      <div class="ui-grid-col-9"><input type="text" pInputText id="name" [(ngModel)]="chosenSyllabus.name"></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-3"><label for="price">课程价格</label></div>
+      <div class="ui-grid-col-9"><input type="text" pInputText id="price" [(ngModel)]="chosenSyllabus.price"></div>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button class="btn btn-danger" type="button"><span class="fa fa-close">删除</span></button>
+      <button class="btn btn-primary" type="button"><span class="fa fa-check">保存</span></button>
+    </div>
+  </p-footer>
+</p-dialog>

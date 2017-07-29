@@ -13,7 +13,6 @@ export class SideMenuComponent implements OnInit {
     this.menuItems = [
       {
         label: '基础信息管理',
-        icon: 'fa-inbox',
         expanded: true,
         items: [{
           label: '课程信息',
@@ -42,7 +41,6 @@ export class SideMenuComponent implements OnInit {
         }]      },
       {
         label: '审核流程管理',
-        icon: 'fa-inbox',
         items: [{
           label: '校区信息',
           icon: 'fa-building',
@@ -58,7 +56,6 @@ export class SideMenuComponent implements OnInit {
         }]      },
       {
         label: '教学流程管理',
-        icon: 'fa-inbox',
         items: [{
           label: '课程信息',
           icon: 'fa-book',
@@ -68,6 +65,14 @@ export class SideMenuComponent implements OnInit {
           icon: 'fa-users',
           routerLink: ['employees1']
         }]
+      },
+      {
+        label: '一级菜单',
+        items: []
+      },
+      {
+        label: '一级菜单',
+        items: []
       }
     ]
   }
