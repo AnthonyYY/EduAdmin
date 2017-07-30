@@ -1,27 +1,33 @@
-<p-dataTable [value]="syllabuses"  [paginator]="syllabuses.length > 10" [rows]="10" (onRowSelect)="onRowSelect($event)" [selectionMode]="'single'">
+<p-dataTable
+  [(value)]="syllabuses"
+  [paginator]="syllabuses.length > tableVisibleRows"
+  [rows]="tableVisibleRows"
+  [(selection)]="selectedSyllabus"
+  (onRowSelect)="onRowSelect($event)"
+  [selectionMode]="'single'">
   <p-header class="clearfix">
     <p class="pull-left title">课程信息概览</p>
     <div class="ui-inputgroup pull-right syllabus-adder">
-      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加课程'"></button>
+      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加课程'" (click)="showAdderDialog()"></button>
     </div>
-    <div class="ui-g pull-right" >
+    <div class="ui-g pull-right">
       <div class="ui-inputgroup syllabus-searcher">
-        <input type="text" pInputText placeholder="请输入课程名称">
+        <input type="text" pInputText [formControl]="keyword" placeholder="请输入课程名称">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
       </div>
     </div>
   </p-header>
-  <p-column [field]="'name'" [header]="'课程名称'" [sortable]="true"></p-column>
-  <p-column [field]="'type'" [header]="'类型'" [sortable]="true"></p-column>
-  <p-column [field]="'price'" [header]="'价格'" [sortable]="true"></p-column>
-  <p-column [field]="'studentNum'" [header]="'学生人数'" [sortable]="true"></p-column>
-  <p-column [field]="'selectedNum'" [header]="'选课人数'" [sortable]="true"></p-column>
-  <p-column [field]="'backNum'" [header]="'退选人数'" [sortable]="true"></p-column>
+  <p-column [styleClass]="'col'" [field]="'name'" [header]="'课程名称'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'type'" [header]="'类型'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'price'" [header]="'价格'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'studentNum'" [header]="'学生人数'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'selectedNum'" [header]="'选课人数'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'backNum'" [header]="'退选人数'"></p-column>
 </p-dataTable>
 
 
-<p-dialog [(visible)]="showEditDialog" [modal]="true" [responsive]="true" [width]="420">
-  <p-header>编辑课程信息</p-header>
+<p-dialog [(visible)]="showSyllabusDialog" [modal]="true" [responsive]="true" [width]="420">
+  <p-header>{{ chosenSyllabus.id ? '编辑' : '新增' }} {{ chosenSyllabus.id && ('[' + chosenSyllabus.name  + ']')  }} 课程条目</p-header>
 
   <div class="ui-grid ui-grid-responsive ui-fluid">
     <div class="ui-grid-row">
@@ -42,8 +48,21 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button class="btn btn-danger" type="button"><span class="fa fa-close">删除</span></button>
-      <button class="btn btn-primary" type="button"><span class="fa fa-check">保存</span></button>
+      <button *ngIf="chosenSyllabus.id" class="btn btn-danger" type="button" (click)="deleteSyllabus(chosenSyllabus.name)"><span class="fa fa-close">删除</span></button>
+      <button
+        [disabled]="!chosenSyllabus.name"
+        class="btn btn-primary"
+        type="button"
+        (click)="saveEditedSyllabus()">
+        <span class="fa {{ chosenSyllabus.id ? 'fa-check':'fa-plus' }}">{{ chosenSyllabus.id ? '保存': '新增' }}</span>
+      </button>
     </div>
   </p-footer>
 </p-dialog>
+
+<p-confirmDialog
+  [header]="'确定删除该课程？'"
+  [width]="425"
+  [icon]="'fa fa-question-circle'"
+  [rejectLabel]="'取消'"
+  [acceptLabel]="'确定'"></p-confirmDialog>

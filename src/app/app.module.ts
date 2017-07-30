@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {
   ButtonModule,
@@ -10,7 +10,8 @@ import {
   TieredMenuModule,
   MenuModule,
   PasswordModule,
-  DataTableModule, PanelMenuModule, ToolbarModule, BreadcrumbModule, DialogModule, DropdownModule
+  DataTableModule, PanelMenuModule, ToolbarModule, BreadcrumbModule, DialogModule, DropdownModule, ConfirmDialogModule,
+  ConfirmationService
 } from "primeng/primeng";
 
 import { routes } from './routes';
@@ -27,6 +28,7 @@ import { SchoolComponent } from './school/school.component';
 import { UserComponent } from './user/user.component';
 import { RoleComponent } from './role/role.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     EmployeeComponent,
     SchoolComponent,
     UserComponent,
-    RoleComponent
+    RoleComponent,
+    FooterComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     ButtonModule,
     InputTextModule,
@@ -57,9 +61,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ToolbarModule,
     DialogModule,
     DropdownModule,
+    ConfirmDialogModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
