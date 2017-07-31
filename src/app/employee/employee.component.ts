@@ -9,6 +9,7 @@ import {FormControl} from "@angular/forms";
 })
 export class EmployeeComponent implements OnInit {
 
+  visibleRows: number;
   employees: Array<Employee>;
   selectedEmployee: Employee;
   chosenEmployee: Employee;
@@ -19,6 +20,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.showEmployeeDialog = false;
+    this.visibleRows = 12;
     this.chosenEmployee = new Employee(
       '1',
       'name',
@@ -36,7 +38,73 @@ export class EmployeeComponent implements OnInit {
       '福建省厦门市思明区护理达到118好理达到118好理达到118好',
       '好人啊 好人啊',
     );
+
     this.employees = [
+      new Employee(
+        '1',
+        'name',
+        'MALE',
+        '2017-12-22',
+        'schoolId',
+        '39232323301222212',
+        '本科',
+        '华侨大学',
+        '数字共亨阿',
+        '18850337784',
+        'yjh2332@163.com',
+        '阿斯兰的回复',
+        '1998222222',
+        '福建省厦门市思明区护理达到118好理达到118好理达到118好',
+        '好人啊 好人啊',
+      ),new Employee(
+        '1',
+        'name',
+        'MALE',
+        '2017-12-22',
+        'schoolId',
+        '39232323301222212',
+        '本科',
+        '华侨大学',
+        '数字共亨阿',
+        '18850337784',
+        'yjh2332@163.com',
+        '阿斯兰的回复',
+        '1998222222',
+        '福建省厦门市思明区护理达到118好理达到118好理达到118好',
+        '好人啊 好人啊',
+      ),new Employee(
+        '1',
+        'name',
+        'MALE',
+        '2017-12-22',
+        'schoolId',
+        '39232323301222212',
+        '本科',
+        '华侨大学',
+        '数字共亨阿',
+        '18850337784',
+        'yjh2332@163.com',
+        '阿斯兰的回复',
+        '1998222222',
+        '福建省厦门市思明区护理达到118好理达到118好理达到118好',
+        '好人啊 好人啊',
+      ),new Employee(
+        '1',
+        'name',
+        'MALE',
+        '2017-12-22',
+        'schoolId',
+        '39232323301222212',
+        '本科',
+        '华侨大学',
+        '数字共亨阿',
+        '18850337784',
+        'yjh2332@163.com',
+        '阿斯兰的回复',
+        '1998222222',
+        '福建省厦门市思明区护理达到118好理达到118好理达到118好',
+        '好人啊 好人啊',
+      ),
       new Employee(
         '1',
         'name',

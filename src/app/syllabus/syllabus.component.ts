@@ -22,11 +22,14 @@ export class SyllabusComponent implements OnInit {
   constructor(private confirmService: ConfirmationService) {}
 
   ngOnInit() {
-    this.tableVisibleRows = 10;
+    this.tableVisibleRows = 12;
     this.syllabuses = [
       new Syllabus('哦阿斯蒂芬','ONETOONE',1,1,120,12,23, new Date(),new Date(),false),
       new Syllabus('萨瓦迪卡','ONETOONE',1,2,120,12,23, new Date(),new Date(),false),
       new Syllabus('么阻扰系','ONETOONE',1,3,120,12,23, new Date(),new Date(),false),
+      new Syllabus('阿里嘎都','ONETOONE',1,4,120,12,23, new Date(),new Date(),false),
+      new Syllabus('阿里嘎都','ONETOONE',1,4,120,12,23, new Date(),new Date(),false),
+      new Syllabus('阿里嘎都','ONETOONE',1,4,120,12,23, new Date(),new Date(),false),
       new Syllabus('阿里嘎都','ONETOONE',1,4,120,12,23, new Date(),new Date(),false),
       new Syllabus('搜嘎','ONETOONE',1,5,120,12,23, new Date(),new Date(),false),
       new Syllabus('哦么的都','ONETOONE',1,6,120,12,23, new Date(),new Date(),false),

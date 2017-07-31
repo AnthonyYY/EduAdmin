@@ -3,8 +3,8 @@
   [resizableColumns]="false"
   [editable]="true"
   [(value)]="employees"
-  [paginator]="employees.length > 10"
-  [rows]="10"
+  [paginator]="employees.length > visibleRows"
+  [rows]="visibleRows"
   (onRowSelect)="onRowSelect()"
   [selectionMode]="'single'">
   <p-header class="clearfix">

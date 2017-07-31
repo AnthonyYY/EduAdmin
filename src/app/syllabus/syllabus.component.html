@@ -1,9 +1,11 @@
 <p-dataTable
+  #employeeTable
   [(value)]="syllabuses"
   [paginator]="syllabuses.length > tableVisibleRows"
   [rows]="tableVisibleRows"
   [(selection)]="selectedSyllabus"
   (onRowSelect)="onRowSelect($event)"
+  [globalFilter]="keyword"
   [selectionMode]="'single'">
   <p-header class="clearfix">
     <p class="pull-left title">课程信息概览</p>
@@ -12,14 +14,20 @@
     </div>
     <div class="ui-g pull-right">
       <div class="ui-inputgroup syllabus-searcher">
-        <input type="text" pInputText [formControl]="keyword" placeholder="请输入课程名称">
+        <input type="text" #keyword pInputText placeholder="全局搜索课程信息">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
       </div>
     </div>
   </p-header>
-  <p-column [styleClass]="'col'" [field]="'name'" [header]="'课程名称'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'type'" [header]="'类型'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'price'" [header]="'价格'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'name'" [filter]="true" [filterPlaceholder]="'课程名称过滤器'" [header]="'课程名称'" [filterMatchMode]="'contains'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'price'" [filter]="true" [filterPlaceholder]="'价格过滤'" [header]="'价格'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'type'" [header]="' 类型 '">
+    <ng-template pTemplate="filter" let-col>
+      <p>
+        <p-dropdown [options]="syllabusTypes" (onChange)="employeeTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
+      </p>
+    </ng-template>
+  </p-column>
   <p-column [styleClass]="'col'" [field]="'studentNum'" [header]="'学生人数'"></p-column>
   <p-column [styleClass]="'col'" [field]="'selectedNum'" [header]="'选课人数'"></p-column>
   <p-column [styleClass]="'col'" [field]="'backNum'" [header]="'退选人数'"></p-column>
