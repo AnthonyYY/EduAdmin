@@ -1,10 +1,8 @@
 export class Employee {
   constructor(
-    public id: string,
     public name: string,
-    public sex: 'MALE' | 'FEMALE',
+    public sex: 'MALE' | 'FEMALE' | '',
     public birthday: any,
-    public schoolId: string,
     public idCard: string,
     public education: string,
     public graduationSchool: string,
@@ -15,6 +13,8 @@ export class Employee {
     public clamantPhone: string,
     public address: string,
     public remark: string,
+    public schoolId?: string,
+    public id?: string,
     public createTime?: Date,
     public updatedTime?: Date,
     public deleted?: boolean,

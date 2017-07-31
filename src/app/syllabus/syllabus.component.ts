@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Syllabus} from "../models/syllabus";
 import {ConfirmationService} from 'primeng/primeng';
-import {FormControl} from "@angular/forms";
 import 'rxjs/Rx';
 
 @Component({
@@ -17,7 +16,7 @@ export class SyllabusComponent implements OnInit {
   selectedSyllabus: Syllabus;
   syllabusTypes = [{label: '一对一课程',value:'ONETOONE'},{label: '精品小组',value:'BOUTIQUEGROUP'},{label: '常规班',value:'NORMALGROUP'}];
   showSyllabusDialog: boolean;
-  keyword = new FormControl();
+  keyword: string;
 
   constructor(private confirmService: ConfirmationService) {}
 
@@ -42,14 +41,6 @@ export class SyllabusComponent implements OnInit {
     this.chosenSyllabus = new Syllabus('哦阿斯蒂芬','ONETOONE',1,1,120,12,23, new Date(),new Date(),false);
     this.showSyllabusDialog = false;
 
-    this.keyword.valueChanges
-      .debounceTime(300)
-      .subscribe( newVal => {
-        console.log(newVal);
-        this.syllabuses = this.syllabuses.filter( syllabus => {
-          return syllabus.name.indexOf(newVal) > -1;
-        } )
-    } )
   }
 
   onRowSelect(event):void {

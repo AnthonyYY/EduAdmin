@@ -1,5 +1,5 @@
 <p-dataTable
-  #employeeTable
+  #syllabusTable
   [(value)]="syllabuses"
   [paginator]="syllabuses.length > tableVisibleRows"
   [rows]="tableVisibleRows"
@@ -23,9 +23,7 @@
   <p-column [styleClass]="'col'" [field]="'price'" [filter]="true" [filterPlaceholder]="'价格过滤'" [header]="'价格'"></p-column>
   <p-column [styleClass]="'col'" [field]="'type'" [header]="' 类型 '">
     <ng-template pTemplate="filter" let-col>
-      <p>
-        <p-dropdown [options]="syllabusTypes" (onChange)="employeeTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
-      </p>
+      <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="syllabusTypes" (onChange)="syllabusTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
     </ng-template>
   </p-column>
   <p-column [styleClass]="'col'" [field]="'studentNum'" [header]="'学生人数'"></p-column>

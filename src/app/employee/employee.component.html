@@ -1,4 +1,6 @@
 <p-dataTable
+  #employeeTable
+  [globalFilter]="keyword"
   [expandableRows]="true"
   [resizableColumns]="false"
   [editable]="true"
@@ -10,21 +12,25 @@
   <p-header class="clearfix">
     <p class="pull-left title">员工信息概览</p>
     <div class="ui-inputgroup pull-right employee-adder">
-      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加员工信息'" (click)="showAdderDialog()"></button>
+      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加员工'" (click)="showAdderDialog()"></button>
     </div>
     <div class="ui-g pull-right">
       <div class="ui-inputgroup employee-searcher">
-        <input type="text" pInputText [formControl]="keyword" placeholder="请输入员工姓名">
+        <input type="text" #keyword pInputText placeholder="全局搜索员工信息">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
       </div>
     </div>
   </p-header>
   <p-column [styleClass]="'col-icon'" [expander]="true"></p-column>
-  <p-column [styleClass]="'col'" [field]="'name'" [header]="'姓名'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'sex'" [header]="'性别'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'name'" [header]="'姓名'" [filter]="true" [filterMatchMode]="'contains'" [filterPlaceholder]="'姓名过滤'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'sex'" [header]="'性别'" [filter]="true" >
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="genders" (onChange)="employeeTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column [styleClass]="'col'" [field]="'phone'" [header]="'手机号码'" [filter]="true" [filterPlaceholder]="'手机号过滤'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'education'" [header]="'学历'" [filter]="true" [filterPlaceholder]="'学历过滤'"></p-column>
   <p-column [styleClass]="'col'" [field]="'birthday'" [header]="'生日'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'education'" [header]="'学历'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'phone'" [header]="'手机号码'"></p-column>
   <p-column [styleClass]="'col'" [field]="'email'" [header]="'邮箱'"></p-column>
   <ng-template let-employee pTemplate="rowexpansion">
     <div class="ui-grid ui-grid-responsive ui-fluid">
@@ -61,38 +67,78 @@
 </p-dataTable>
 
 
-<p-dialog [(visible)]="showEmployeeDialog" [modal]="true" [responsive]="true" [width]="420">
-  <p-header>{{ chosenEmployee.id ? '编辑' : '新增' }} {{ chosenEmployee.id && ('[' + chosenEmployee.name  + ']')  }} 课程条目</p-header>
+<p-dialog [(visible)]="showEmployeeDialog" [modal]="true" [responsive]="true" [width]="600">
+  <p-header>{{ chosenEmployee.id ? '编辑' : '新增' }} {{ chosenEmployee.id && ('[' + chosenEmployee.name  + ']')  }} 员工信息</p-header>
 
   <div class="ui-grid ui-grid-responsive ui-fluid">
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="name">姓名</label></div>
-      <div class="ui-grid-col-9"><p-dropdown id="name" [options]="genders" [(ngModel)]="chosenEmployee.sex" [style]="{'width':'100%'}"></p-dropdown></div>
-    </div>
+    <div class="io-grid-row">
+      <div class="ui-grid-col-5">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="name">姓名</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="name" [(ngModel)]="chosenEmployee.name"></div>
+        </div>
 
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="gender">性别</label></div>
-      <div class="ui-grid-col-9"><p-dropdown id="gender" [options]="genders" [(ngModel)]="chosenEmployee.sex" [style]="{'width':'100%'}"></p-dropdown></div>
-    </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="gender">性别</label></div>
+          <div class="ui-grid-col-8"><p-dropdown id="gender" [options]="genders" [(ngModel)]="chosenEmployee.sex" [style]="{'width':'100%'}"></p-dropdown></div>
+        </div>
 
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="birthday">生日</label></div>
-      <div class="ui-grid-col-9"><input type="text" pInputText id="birthday" [(ngModel)]="chosenEmployee.birthday"></div>
-    </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="birthday">手机号</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="phone" [(ngModel)]="chosenEmployee.phone"></div>
+        </div>
 
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="idCard">身份证号</label></div>
-      <div class="ui-grid-col-9"><input type="text" pInputText id="idCard" [(ngModel)]="chosenEmployee.idCard"></div>
-    </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="birthday">生日</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="birthday" [(ngModel)]="chosenEmployee.birthday"></div>
+        </div>
 
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="education">学历</label></div>
-      <div class="ui-grid-col-9"><input type="text" pInputText id="education" [(ngModel)]="chosenEmployee.education"></div>
-    </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="email">邮箱</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="email" [(ngModel)]="chosenEmployee.email"></div>
+        </div>
 
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-3"><label for="graduationSchool">毕业院校</label></div>
-      <div class="ui-grid-col-9"><input type="text" pInputText id="graduationSchool" [(ngModel)]="chosenEmployee.graduationSchool"></div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="education">学历</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="education" [(ngModel)]="chosenEmployee.education"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="education">专业</label></div>
+          <div class="ui-grid-col-8"><input type="text" pInputText id="specialty" [(ngModel)]="chosenEmployee.specialty"></div>
+        </div>
+      </div>
+      <div class="ui-grid-col-7">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="graduationSchool">毕业院校</label></div>
+          <div class="ui-grid-col-9"><input type="text" pInputText id="graduationSchool" [(ngModel)]="chosenEmployee.graduationSchool"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="idCard">身份证号</label></div>
+          <div class="ui-grid-col-9"><input type="text" pInputText id="idCard" [(ngModel)]="chosenEmployee.idCard"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="address">家庭住址</label></div>
+          <div class="ui-grid-col-9"><input type="text" pInputText id="address" [(ngModel)]="chosenEmployee.address"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="clamantName">联系人姓名</label></div>
+          <div class="ui-grid-col-9"><input type="text" pInputText id="clamantName" [(ngModel)]="chosenEmployee.clamantName"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="clamantPhone">联系人电话</label></div>
+          <div class="ui-grid-col-9"><input type="text" pInputText id="clamantPhone" [(ngModel)]="chosenEmployee.clamantPhone"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="remark">描述信息</label></div>
+          <div class="ui-grid-col-9"><textarea rows="1" [autoResize]="'autoResize'" pInputTextarea id="remark" [(ngModel)]="chosenEmployee.remark"></textarea></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -111,7 +157,7 @@
 </p-dialog>
 
 <p-confirmDialog
-  [header]="'确定删除该课程？'"
+  [header]="'确定删除该员工信息？'"
   [width]="425"
   [icon]="'fa fa-question-circle'"
   [rejectLabel]="'取消'"

@@ -4,5 +4,6 @@ export class Role {
     public schoolId: string,
     public name: string,
     public remark: string,
+    public deleted: boolean,
   ) {}
 }

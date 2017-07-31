@@ -11,7 +11,7 @@ import {
   MenuModule,
   PasswordModule,
   DataTableModule, PanelMenuModule, ToolbarModule, BreadcrumbModule, DialogModule, DropdownModule, ConfirmDialogModule,
-  ConfirmationService
+  ConfirmationService, InputTextareaModule
 } from "primeng/primeng";
 
 import { routes } from './routes';
@@ -62,6 +62,7 @@ import { FooterComponent } from './footer/footer.component';
     DialogModule,
     DropdownModule,
     ConfirmDialogModule,
+    InputTextareaModule,
     RouterModule.forRoot(routes)
   ],
   providers: [ConfirmationService],
