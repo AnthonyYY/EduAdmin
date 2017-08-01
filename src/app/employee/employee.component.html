@@ -73,7 +73,7 @@
 </p-dataTable>
 
 
-<p-dialog [(visible)]="showEmployeeDialog" [modal]="true" [responsive]="true" [width]="600">
+<p-dialog [(visible)]="showEmployeeDialog" [modal]="true" [responsive]="true" [width]="600" [dismissableMask]="true">
   <p-header>{{ chosenEmployee.id ? '编辑' : '新增' }} {{ chosenEmployee.id && ('[' + chosenEmployee.name  + ']')  }} 员工信息</p-header>
 
   <div class="ui-grid ui-grid-responsive ui-fluid">
@@ -150,13 +150,21 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="chosenEmployee.id" class="btn btn-danger" type="button" (click)="deleteEmployee(chosenEmployee.name)"><span class="fa fa-close">删除</span></button>
+      <button
+        *ngIf="chosenEmployee.id"
+        class="ui-button-danger"
+        (click)="deleteEmployee(chosenEmployee.name)"
+        pButton
+        [icon]="'fa-trash-o'"
+        [label]="'删除'"></button>
       <button
         [disabled]="!chosenEmployee.name"
-        class="btn btn-primary"
+        class="ui-btn-default"
         type="button"
+        pButton
+        [label]="chosenEmployee.id ? '保存': '新增'"
+        [icon]="chosenEmployee.id ? 'fa-save':'fa-plus'"
         (click)="saveEditedEmployee()">
-        <span class="fa {{ chosenEmployee.id ? 'fa-check':'fa-plus' }}">{{ chosenEmployee.id ? '保存': '新增' }}</span>
       </button>
     </div>
   </p-footer>

@@ -47,7 +47,7 @@
 </p-dataTable>
 
 
-<p-dialog [(visible)]="showSyllabusDialog" [modal]="true" [responsive]="true" [width]="420">
+<p-dialog [(visible)]="showSyllabusDialog" [modal]="true" [responsive]="true" [width]="420" [dismissableMask]="true">
   <p-header>{{ chosenSyllabus.id ? '编辑' : '新增' }} {{ chosenSyllabus.id && ('[' + chosenSyllabus.name  + ']')  }} 课程条目</p-header>
 
   <div class="ui-grid ui-grid-responsive ui-fluid">
@@ -69,13 +69,22 @@
 
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button *ngIf="chosenSyllabus.id" class="btn btn-danger" type="button" (click)="deleteSyllabus(chosenSyllabus.name)"><span class="fa fa-close">删除</span></button>
+      <button
+        *ngIf="chosenSyllabus.id"
+        class="ui-button-danger"
+        (click)="deleteSyllabus(chosenSyllabus.name)"
+        pButton
+        [label]="'删除'"
+        [icon]="'fa-trash'"
+      ></button>
       <button
         [disabled]="!chosenSyllabus.name"
-        class="btn btn-primary"
+        class="ui-button"
+        pButton
+        [icon]="chosenSyllabus.id ? 'fa-save':'fa-plus'"
         type="button"
+        [label]="chosenSyllabus.id ? '保存': '新增'"
         (click)="saveEditedSyllabus()">
-        <span class="fa {{ chosenSyllabus.id ? 'fa-check':'fa-plus' }}">{{ chosenSyllabus.id ? '保存': '新增' }}</span>
       </button>
     </div>
   </p-footer>

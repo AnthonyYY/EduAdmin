@@ -1,16 +1,43 @@
 <p-dataGrid [value]="roles" [paginator]="true" [rows]="visibleRows">
-  <p-header>
-    <h4>角色列表</h4>
+  <p-header class="clearfix">
+    <h4 class="pull-left">角色列表</h4>
+    <div class="ui-inputgroup pull-right employee-adder">
+      <button pButton [icon]="'fa-plus'" type="button" [label]="'添加角色'" (click)="showAdderDialog()"></button>
+    </div>
   </p-header>
   <ng-template let-role pTemplate="item">
     <div class="ui-g-12 ui-md-4 ui-lg-3">
       <p-panel>
         <p-header>
           <span>姓名: {{role.name}}</span>
-          <span class="fa fa-pencil-square-o pull-right"></span>
+          <span class="fa fa-pencil-square-o pull-right" (click)="openRoleDialog(role)"></span>
         </p-header>
         <div class="remark">{{ role.remark }}</div>
       </p-panel>
     </div>
   </ng-template>
 </p-dataGrid>
+
+<p-dialog [(visible)]="showRoleDialog" [width]="425" [modal]="true" [dismissableMask]="true">
+  <p-header >
+    编辑角色{{ chosenRole.name }}
+  </p-header>
+
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-grid-col-2" [style.lineHeight]="'32px'">姓名</div>
+      <div class="ui-grid-col-10"><input type="text" [(ngModel)]="chosenRole.name" class="ui-inputtext" pInputText></div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-grid-col-2" [style.lineHeight]="'32px'">描述</div>
+      <div class="ui-grid-col-10">
+        <textarea pInputTextarea rows="3" [(ngModel)]="chosenRole.remark"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <button pButton class="ui-button-default" [icon]="'fa-save'" [label]="'保存'" [disabled]="!chosenRole.name || !chosenRole.remark" (click)="saveEditedRole()"></button>
+  </p-footer>
+</p-dialog>
