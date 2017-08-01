@@ -26,9 +26,24 @@
       <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="syllabusTypes" (onChange)="syllabusTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
     </ng-template>
   </p-column>
-  <p-column [styleClass]="'col'" [field]="'studentNum'" [header]="'学生人数'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'selectedNum'" [header]="'选课人数'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'backNum'" [header]="'退选人数'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'studentNum'" header="学生人数({{participantCount || '未过滤' }})" [filterMatchMode]="'equals'">
+    <ng-template pTemplate="filter" let-col>
+      <i class="fa fa-close" (click)="participantCount=null;syllabusTable.filter(null,col.field,col.filterMatchMode)"></i>
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="participantCount" [min]="0" [max]="maxParticipantCount" (onSlideEnd)="syllabusTable.filter($event.value || null,col.field,col.filterMatchMode)"></p-slider>
+    </ng-template>
+  </p-column>
+  <p-column [styleClass]="'col'" [field]="'selectedNum'" header="选课人数({{ returnWantCount || '未过滤' }})" [filterMatchMode]="'equals'">
+    <ng-template pTemplate="filter" let-col>
+      <i class="fa fa-close" (click)="returnWantCount=null;syllabusTable.filter(null,col.field,col.filterMatchMode)"></i>
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="returnWantCount" [min]="0" [max]="maxReturnWantCount" (onSlideEnd)="syllabusTable.filter($event.value || null,col.field,col.filterMatchMode)"></p-slider>
+    </ng-template>
+  </p-column>
+  <p-column [styleClass]="'col'" [field]="'backNum'" header="退选人数({{ returnedCount|| '未过滤' }})" [filterMatchMode]="'equals'">
+    <ng-template pTemplate="filter" let-col>
+      <i class="fa fa-close" (click)="returnedCount=null;syllabusTable.filter(null,col.field,col.filterMatchMode)"></i>
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="returnedCount" [min]="0" [max]="maxReturnedCount" (onSlideEnd)="syllabusTable.filter($event.value || null,col.field,col.filterMatchMode)"></p-slider>
+    </ng-template>
+  </p-column>
 </p-dataTable>
 
 

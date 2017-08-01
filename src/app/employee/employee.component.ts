@@ -15,12 +15,15 @@ export class EmployeeComponent implements OnInit {
   chosenEmployee: Employee;
   showEmployeeDialog: boolean;
   genders: Array<{label: string,value: string}>;
+  birthYear: number;
+  minBirthYear: number;
+  maxBirthYear: number;
   constructor() { }
 
   ngOnInit() {
+    this.minBirthYear = 1950;
+    this.maxBirthYear = new Date().getFullYear();
     this.genders = [{label: '全部',value: ''},{label: '男',value: 'MALE'} ,{label: '女',value: 'FEMALE'}];
-    this.showEmployeeDialog = false;
-    this.visibleRows = 12;
     this.chosenEmployee = new Employee(
       'name',
       'MALE',
@@ -38,6 +41,8 @@ export class EmployeeComponent implements OnInit {
       '福建省厦门市思明区护理达到118好理达到118好理达到118好',
       '好人啊 好人啊',
     );
+    this.showEmployeeDialog = false;
+    this.visibleRows = 12;
 
     this.employees = [
       new Employee(
@@ -633,7 +638,7 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-  findChosenEmployeeIndex(): number{
+  findChosenEmployeeIndex(): number {
     return this.employees.indexOf(this.chosenEmployee);
   }
 

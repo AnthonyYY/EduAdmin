@@ -14,13 +14,23 @@ export class SyllabusComponent implements OnInit {
   syllabuses: Array<Syllabus>;
   chosenSyllabus: Syllabus;
   selectedSyllabus: Syllabus;
-  syllabusTypes = [{label: '一对一课程',value:'ONETOONE'},{label: '精品小组',value:'BOUTIQUEGROUP'},{label: '常规班',value:'NORMALGROUP'}];
+  participantCount: number;
+  returnWantCount: number;
+  returnedCount: number;
+  maxParticipantCount: number;
+  maxReturnWantCount: number;
+  maxReturnedCount: number;
+  syllabusTypes = [
+    {label: '全部',value:''},{label: '一对一课程',value:'ONETOONE'},{label: '精品小组',value:'BOUTIQUEGROUP'},{label: '常规班',value:'NORMALGROUP'}
+  ];
   showSyllabusDialog: boolean;
-  keyword: string;
 
   constructor(private confirmService: ConfirmationService) {}
 
   ngOnInit() {
+    this.maxParticipantCount = 120;
+    this.maxReturnWantCount = 120;
+    this.maxReturnedCount = 120;
     this.tableVisibleRows = 12;
     this.syllabuses = [
       new Syllabus('哦阿斯蒂芬','ONETOONE',1,1,120,12,23, new Date(),new Date(),false),
