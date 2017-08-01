@@ -14,9 +14,7 @@ export class RoleComponent implements OnInit {
   selectionRole: Role;
   showRoleDialog: boolean;
   visibleRows: number;
-  constructor(
-    private confirmationService:ConfirmationService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.showRoleDialog = false;

@@ -5,6 +5,7 @@
   [rows]="tableVisibleRows"
   [(selection)]="selectedSyllabus"
   (onRowSelect)="onRowSelect($event)"
+  [emptyMessage]="'没有相关数据'"
   [globalFilter]="keyword"
   [selectionMode]="'single'">
   <p-header class="clearfix">
