@@ -8,6 +8,7 @@
   [paginator]="employees.length > visibleRows"
   [rows]="visibleRows"
   (onRowSelect)="onRowSelect()"
+  [(selection)]="selectedEmployee"
   [selectionMode]="'single'">
   <p-header class="clearfix">
     <p class="pull-left title">员工信息概览</p>
@@ -31,10 +32,10 @@
   <p-column [styleClass]="'col'" [field]="'phone'" [header]="'手机号码'" [filter]="true" [filterPlaceholder]="'手机号过滤'"></p-column>
   <p-column [styleClass]="'col'" [field]="'education'" [header]="'学历'" [filter]="true" [filterPlaceholder]="'学历过滤'"></p-column>
   <p-column [styleClass]="'col'" [field]="'email'" [header]="'邮箱'" [filter]="true" [filterMatchMode]="'contains'" [filterPlaceholder]="'邮箱过滤'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'birthday'" header="生日({{ birthYear || '年'}})" [filter]="true" [filterMatchMode]="'equals'">
+  <p-column [styleClass]="'col'" [field]="'birthday'" header="生日({{ birthYear || '年'}})" [filter]="true" [filterMatchMode]="'startsWith'">
     <ng-template pTemplate="filter" let-col>
       <i class="fa fa-close" (click)="birthYear=null;employeeTable.filter(null,col.field,col.filterMatchMode)"></i>
-      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="birthYear" [min]="minBirthYear" [max]="maxBirthYear" (onSlideEnd)="employeeTable.filter($event.value || null,col.field,col.filterMatchMode)"></p-slider>
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="birthYear" [min]="minBirthYear" [max]="maxBirthYear" (onSlideEnd)="employeeTable.filter($event.value == 0 ? null : $event.value.toString(),col.field,col.filterMatchMode)"></p-slider>
     </ng-template>
   </p-column>
   <ng-template let-employee pTemplate="rowexpansion">

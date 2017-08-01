@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../models/employee";
-import {FormControl} from "@angular/forms";
+import {ConfirmationService} from 'primeng/primeng'
 
 @Component({
   selector: 'app-employee',
@@ -18,7 +18,9 @@ export class EmployeeComponent implements OnInit {
   birthYear: number;
   minBirthYear: number;
   maxBirthYear: number;
-  constructor() { }
+  constructor(
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit() {
     this.minBirthYear = 1950;
@@ -606,6 +608,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    this.chosenEmployee = {...this.selectedEmployee};
     this.showEmployeeDialog = true;
   }
 
@@ -630,16 +633,27 @@ export class EmployeeComponent implements OnInit {
     this.showEmployeeDialog = true;
   }
 
-  deleteEmployee() {
-
+  deleteEmployee(employeeName) {
+    this.confirmationService.confirm({
+      message: `确定删除[${employeeName}]员工信息`,
+      accept: () => {
+        const toDeleteEmployeeIndex = this.findChosenEmployeeIndex();
+        this.employees.splice(toDeleteEmployeeIndex,1);
+        this.employees = [...this.employees];
+        this.showEmployeeDialog = false;
+      }
+    })
   }
 
   saveEditedEmployee() {
-
+    const toSaveEmployeeIndex = this.findChosenEmployeeIndex();
+    this.employees[toSaveEmployeeIndex] = this.chosenEmployee;
+    this.employees = [...this.employees];
+    this.showEmployeeDialog = false;
   }
 
   findChosenEmployeeIndex(): number {
-    return this.employees.indexOf(this.chosenEmployee);
+    return this.employees.indexOf(this.selectedEmployee);
   }
 
 }
