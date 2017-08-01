@@ -1,3 +1,153 @@
-<p>
-  student works!
-</p>
+<p-dataTable
+  #studentTable
+  [globalFilter]="keyword"
+  [expandableRows]="true"
+  [resizableColumns]="false"
+  [editable]="true"
+  [(value)]="students"
+  [paginator]="students.length > visibleRows"
+  [rows]="visibleRows"
+  (onRowSelect)="onRowSelect()"
+  [(selection)]="selectedStudent"
+  [emptyMessage]="'没有相关数据'"
+  [selectionMode]="'single'">
+  <p-header class="clearfix">
+    <p class="pull-left title">学生信息概览</p>
+    <div class="ui-inputgroup pull-right employee-adder">
+        <button pButton [icon]="'fa-plus'" type="button" [label]="'添加学生'" (click)="showAdderDialog()"></button>
+    </div>
+    <div class="ui-g pull-right">
+      <div class="ui-inputgroup employee-searcher">
+        <input #keyword pInputText placeholder="全局搜索学生信息">
+        <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+      </div>
+    </div>
+  </p-header>
+  <p-column [styleClass]="'col-icon'" [expander]="true"></p-column>
+  <p-column [styleClass]="'col'" [field]="'name'" [header]="'姓名'" [filter]="true" [filterMatchMode]="'contains'" [filterPlaceholder]="'姓名过滤'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'sex'" [header]="'性别'" [filter]="true" >
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="genders" (onChange)="studentTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column [styleClass]="'col'" [field]="'phone'" [header]="'手机号码'" [filter]="true" [filterPlaceholder]="'手机号过滤'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'orignSchool'" [header]="'就读学校'" [filter]="true" [filterMatchMode]="'contains'" [filterPlaceholder]="'学校过滤'"></p-column>
+  <p-column [styleClass]="'col'" [field]="'birthday'" [header]="'学科'" [filter]="true" [filterMatchMode]="'equals'">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="subjects" (onChange)="studentTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <ng-template let-employee pTemplate="rowexpansion">
+    <div class="ui-grid ui-grid-responsive ui-fluid">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">紧急联系人姓名:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.clamantName }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">紧急联系人电话:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.clamantPhone }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">身份证号:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.idCard }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">家庭住址:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.address }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">描述信息:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.remark }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">毕业院校:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.graduationSchool }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">专业:</div>
+        <div class="ui-grid-col-10 col-value">{{ employee.specialty }}</div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataTable>
+
+
+<p-dialog [(visible)]="showStudentDialog" [modal]="true" [responsive]="true" [width]="600" [dismissableMask]="true">
+  <p-header>{{ chosenStudent.id ? '编辑' : '新增' }} {{ chosenStudent.id && ('[' + chosenStudent.name  + ']')  }} 学生信息</p-header>
+
+  <div class="ui-grid ui-grid-responsive ui-fluid">
+    <div class="io-grid-row">
+      <div class="ui-grid-col-5">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="name">姓名</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="chosenStudent.name"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="gender">性别</label></div>
+          <div class="ui-grid-col-8"><p-dropdown id="gender" [options]="genders" [(ngModel)]="chosenStudent.sex" [style]="{'width':'100%'}"></p-dropdown></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="phone">手机号</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="phone" [(ngModel)]="chosenStudent.phone"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="birthday">生日</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="birthday" [(ngModel)]="chosenStudent.birthday"></div>
+        </div>
+
+      </div>
+      <div class="ui-grid-col-7">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="orignSchool">现就读学校</label></div>
+          <div class="ui-grid-col-9"><input pInputText id="orignSchool" [(ngModel)]="chosenStudent.orignSchool"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="idCard">身份证号</label></div>
+          <div class="ui-grid-col-9"><input pInputText id="idCard" [(ngModel)]="chosenStudent.idCard"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="address">家庭住址</label></div>
+          <div class="ui-grid-col-9"><input pInputText id="address" [(ngModel)]="chosenStudent.address"></div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3"><label for="remark">描述信息</label></div>
+          <div class="ui-grid-col-9"><textarea rows="1" [autoResize]="'autoResize'" pInputTextarea id="remark" [(ngModel)]="chosenStudent.remark"></textarea></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        *ngIf="chosenStudent.id"
+        class="ui-button-danger"
+        (click)="deleteStudent(chosenStudent.name)"
+        pButton
+        [icon]="'fa-trash-o'"
+        [label]="'删除'"></button>
+      <button
+        [disabled]="!chosenStudent.name"
+        class="ui-btn-default"
+        type="button"
+        pButton
+        [label]="chosenStudent.id ? '保存': '新增'"
+        [icon]="chosenStudent.id ? 'fa-save':'fa-plus'"
+        (click)="saveEditedStudent()">
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-confirmDialog
+  [header]="'确定删除该员工信息？'"
+  [width]="425"
+  [icon]="'fa fa-question-circle'"
+  [rejectLabel]="'取消'"
+  [acceptLabel]="'确定'"></p-confirmDialog>
