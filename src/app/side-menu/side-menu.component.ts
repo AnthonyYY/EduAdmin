@@ -23,14 +23,6 @@ export class SideMenuComponent implements OnInit {
           icon: 'fa-users',
           routerLink: ['employees']
         },{
-          label: '角色信息',
-          icon: 'fa-user',
-          routerLink: ['roles']
-        },{
-          label: '校区信息',
-          icon: 'fa-building',
-          routerLink: ['schools']
-        },{
           label: '学生信息',
           icon: 'fa-graduation-cap',
           routerLink: ['students']
@@ -38,6 +30,14 @@ export class SideMenuComponent implements OnInit {
           label: '用户信息',
           icon: 'fa-user-circle-o',
           routerLink: ['users']
+        },{
+          label: '角色信息',
+          icon: 'fa-user',
+          routerLink: ['roles']
+        },{
+          label: '校区信息',
+          icon: 'fa-building',
+          routerLink: ['schools']
         }]      },
       {
         label: '审核流程管理',

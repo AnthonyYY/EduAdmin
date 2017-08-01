@@ -1,3 +1,16 @@
-<p>
-  role works!
-</p>
+<p-dataGrid [value]="roles" [paginator]="true" [rows]="visibleRows">
+  <p-header>
+    <h4>角色列表</h4>
+  </p-header>
+  <ng-template let-role pTemplate="item">
+    <div class="ui-g-12 ui-md-4 ui-lg-3">
+      <p-panel>
+        <p-header>
+          <span>姓名: {{role.name}}</span>
+          <span class="fa fa-pencil-square-o pull-right"></span>
+        </p-header>
+        <div class="remark">{{ role.remark }}</div>
+      </p-panel>
+    </div>
+  </ng-template>
+</p-dataGrid>
