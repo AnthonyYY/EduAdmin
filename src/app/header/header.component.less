@@ -1,23 +1,26 @@
 @import "../../assets/less/variable";
-.navbar-header{
-  .navbar-brand{
-    width: 150px;
-    text-align: center;
-    a{  color: @highlight-color;  }
-    &:hover{
-      background: lighten(@gray, 10%);
+.navbar.navbar-fixed-top{
+  z-index: 3;
+  .navbar-header{
+    .navbar-brand{
+      width: 150px;
+      text-align: center;
+      a{  color: @highlight-color;  }
+      &:hover{
+        background: lighten(@gray, 10%);
+      }
+    }
+    .navbar-toggle{
+      color: @white;
+    }
+    .btn-group{
+      margin: 5px;
     }
   }
-  .navbar-toggle{
-    color: @white;
-  }
-  .btn-group{
-    margin: 5px;
-  }
-}
 
-.navbar-collapse{
-  .dropdown-toggle{
-    width: 160px;
+  .navbar-collapse{
+    .dropdown-toggle{
+      width: 160px;
+    }
   }
 }
