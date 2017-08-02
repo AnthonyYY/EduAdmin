@@ -608,7 +608,7 @@ export class EmployeeComponent implements OnInit {
     ]
   }
 
-  onRowSelect() {
+  onRowSelect(event) {
     this.chosenEmployee = {...this.selectedEmployee};
     this.showEmployeeDialog = true;
   }
@@ -647,8 +647,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   saveEditedEmployee() {
-    const toSaveEmployeeIndex = this.findChosenEmployeeIndex();
-    this.employees[toSaveEmployeeIndex] = this.chosenEmployee;
+    if(this.chosenEmployee.id){
+      const toSaveEmployeeIndex = this.findChosenEmployeeIndex();
+      this.employees[toSaveEmployeeIndex] = this.chosenEmployee;
+    }else{
+      this.chosenEmployee.id = '12';
+      this.employees.unshift(this.chosenEmployee);
+    }
     this.employees = [...this.employees];
     this.showEmployeeDialog = false;
   }

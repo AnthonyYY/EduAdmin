@@ -317,8 +317,12 @@ export class StudentComponent implements OnInit {
   }
 
   saveEditedStudent():void {
-    const toSaveStudentIndex = this.findChosenStudentIndex();
-    this.students[toSaveStudentIndex] = this.chosenStudent;
+    if(this.chosenStudent.id){
+      const toSaveStudentIndex = this.findChosenStudentIndex();
+      this.students[toSaveStudentIndex] = this.chosenStudent;
+    }else{
+      this.students.unshift(this.chosenStudent);
+    }
     this.students = [...this.students];
     this.showStudentDialog= false;
   };
