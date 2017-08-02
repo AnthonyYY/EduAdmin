@@ -13,11 +13,11 @@
   [selectionMode]="'single'">
   <p-header class="clearfix">
     <p class="pull-left title">学生信息概览</p>
-    <div class="ui-inputgroup pull-right employee-adder">
+    <div class="ui-inputgroup pull-right item-adder">
         <button pButton [icon]="'fa-plus'" type="button" [label]="'添加学生'" (click)="showAdderDialog()"></button>
     </div>
     <div class="ui-g pull-right">
-      <div class="ui-inputgroup employee-searcher">
+      <div class="ui-inputgroup item-searcher">
         <input #keyword pInputText placeholder="全局搜索学生信息">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
       </div>
@@ -32,40 +32,53 @@
   </p-column>
   <p-column [styleClass]="'col'" [field]="'phone'" [header]="'手机号码'" [filter]="true" [filterPlaceholder]="'手机号过滤'"></p-column>
   <p-column [styleClass]="'col'" [field]="'orignSchool'" [header]="'就读学校'" [filter]="true" [filterMatchMode]="'contains'" [filterPlaceholder]="'学校过滤'"></p-column>
-  <p-column [styleClass]="'col'" [field]="'birthday'" [header]="'学科'" [filter]="true" [filterMatchMode]="'equals'">
+  <p-column [styleClass]="'col'" [field]="'subject'" [header]="'学科'" [filter]="true" [filterMatchMode]="'equals'">
     <ng-template pTemplate="filter" let-col>
       <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="subjects" (onChange)="studentTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
     </ng-template>
   </p-column>
-  <ng-template let-employee pTemplate="rowexpansion">
+  <p-column [styleClass]="'col'" [field]="'grade'" [header]="'年级'" [filter]="true" [filterPlaceholder]="'年级过滤'" [filterMatchMode]="'equals'">
+    <ng-template pTemplate="filter" let-col>
+      <p-dropdown [style]="{width: '100%',marginTop: '3.5px'}" [options]="grades" (onChange)="studentTable.filter($event.value,col.field,col.filterMatchMode)" [styleClass]="'ui-column-filter'"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <ng-template let-student pTemplate="rowexpansion">
     <div class="ui-grid ui-grid-responsive ui-fluid">
       <div class="ui-grid-row">
-        <div class="ui-grid-col-2 col-label">紧急联系人姓名:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.clamantName }}</div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2 col-label">紧急联系人电话:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.clamantPhone }}</div>
-      </div>
-      <div class="ui-grid-row">
         <div class="ui-grid-col-2 col-label">身份证号:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.idCard }}</div>
+        <div class="ui-grid-col-10 col-value">{{ student.idCard }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">出生日期:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.birthday }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">学生来源:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.source }}</div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-2 col-label">家庭住址:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.address }}</div>
+        <div class="ui-grid-col-10 col-value">{{ student.address }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">家长姓名:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.parentName }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">家长性别:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.parentSex }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">家长身份证号:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.parentIdCard }}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2 col-label">家长电话:</div>
+        <div class="ui-grid-col-10 col-value">{{ student.parentPhone }}</div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-2 col-label">描述信息:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.remark }}</div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2 col-label">毕业院校:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.graduationSchool }}</div>
-      </div>
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-2 col-label">专业:</div>
-        <div class="ui-grid-col-10 col-value">{{ employee.specialty }}</div>
+        <div class="ui-grid-col-10 col-value">{{ student.remark }}</div>
       </div>
     </div>
   </ng-template>

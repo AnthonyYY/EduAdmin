@@ -13,11 +13,11 @@
   [selectionMode]="'single'">
   <p-header class="clearfix">
     <p class="pull-left title">员工信息概览</p>
-    <div class="ui-inputgroup pull-right employee-adder">
+    <div class="ui-inputgroup pull-right item-adder">
       <button pButton [icon]="'fa-plus'" type="button" [label]="'添加员工'" (click)="showAdderDialog()"></button>
     </div>
     <div class="ui-g pull-right">
-      <div class="ui-inputgroup employee-searcher">
+      <div class="ui-inputgroup item-searcher">
         <input type="text" #keyword pInputText placeholder="全局搜索员工信息">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
       </div>

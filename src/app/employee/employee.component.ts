@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../models/employee";
 import {ConfirmationService} from 'primeng/primeng'
+import {Gender} from "../models/gender";
 
 @Component({
   selector: 'app-employee',
@@ -14,7 +15,7 @@ export class EmployeeComponent implements OnInit {
   selectedEmployee: Employee;
   chosenEmployee: Employee;
   showEmployeeDialog: boolean;
-  genders: Array<{label: string,value: string}>;
+  genders: Array<Gender>;
   birthYear: number;
   minBirthYear: number;
   maxBirthYear: number;
