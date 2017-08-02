@@ -608,7 +608,7 @@ export class EmployeeComponent implements OnInit {
     ]
   }
 
-  onRowSelect(event) {
+  onRowSelect() {
     this.chosenEmployee = {...this.selectedEmployee};
     this.showEmployeeDialog = true;
   }

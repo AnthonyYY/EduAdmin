@@ -36,7 +36,7 @@
   <p-column [styleClass]="'col'" [field]="'birthday'" header="生日({{ birthYear || '年'}})" [filter]="true" [filterMatchMode]="'startsWith'">
     <ng-template pTemplate="filter" let-col>
       <i class="fa fa-close" (click)="birthYear=null;employeeTable.filter(null,col.field,col.filterMatchMode)"></i>
-      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="birthYear" [min]="minBirthYear" [max]="maxBirthYear" (onSlideEnd)="employeeTable.filter($event.value == 0 ? null : $event.value.toString(),col.field,col.filterMatchMode)"></p-slider>
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="birthYear" [min]="minBirthYear" [max]="maxBirthYear" (onSlideEnd)="employeeTable.filter($event.value == 1950 ? null:$event.value.toString(),col.field,col.filterMatchMode);(birthYear == 1950) && (birthYear=null)"></p-slider>
     </ng-template>
   </p-column>
   <ng-template let-employee pTemplate="rowexpansion">
